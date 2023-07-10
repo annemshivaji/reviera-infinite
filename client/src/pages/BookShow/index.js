@@ -49,15 +49,15 @@ function BookShow() {
             return (
               <div className="flex gap-1 justify-center">
                 {Array.from(Array(columns).keys()).map((column, index) => {
-                  const seatNumber = i;
                   i++;
+                  const seatNumber = i;
                   let seatClass = "seat";
 
-                  if (selectedSeats.includes(seat * columns + column + 1)) {
+                  if (selectedSeats.includes(seatNumber)) {
                     seatClass = seatClass + " selected-seat";
                   }
 
-                  if (show.bookedSeats.includes(seat * columns + column + 1)) {
+                  if (show.bookedSeats.includes(seatNumber)) {
                     seatClass = seatClass + " booked-seat";
                   }
 
@@ -75,7 +75,7 @@ function BookShow() {
                           }
                         }}
                       >
-                        <h1 className="text-sm">{i}</h1>
+                        <h1 className="text-sm">{seatNumber}</h1>
                       </div>
                     )
                   );
