@@ -10,7 +10,15 @@ router.post("/register", async (req, res) => {
   try {
     // check if user already exists
     const userExists = await User.findOne({ email: req.body.email });
-    if (userExists) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.ac.in+$/;
+    if (!emailRegex.test(req.body.email)) {
+      return res.send({
+        success: false,
+        message: "Use VIT official mail to register",
+      });
+    }
+
+    else if (userExists) {
       return res.send({
         success: false,
         message: "User already exists",

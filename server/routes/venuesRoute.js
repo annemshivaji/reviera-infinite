@@ -7,7 +7,16 @@ const Show = require("../models/showModel");
 router.post("/add-venue", authMiddleware, async (req, res) => {
   try {
     const newVenue = new Venue(req.body);
-    await newVenue.save();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.ac.in+$/;
+    if (!emailRegex.test(req.body.email)) {
+      return res.send({
+        success: false,
+        message: "Use VIT official mail to register",
+      });
+    }
+
+    else await newVenue.save();
     res.send({
       success: true,
       message: "Venue added successfully",
