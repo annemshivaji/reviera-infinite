@@ -35,7 +35,7 @@ function BookShow() {
     }
   };
 
-
+  var i = 0;
   const getSeats = () => {
     const columns = 12;
     const totalSeats = show.totalSeats;
@@ -49,7 +49,8 @@ function BookShow() {
             return (
               <div className="flex gap-1 justify-center">
                 {Array.from(Array(columns).keys()).map((column, index) => {
-                  const seatNumber = seat * columns + column + 1;
+                  const seatNumber = i;
+                  i++;
                   let seatClass = "seat";
 
                   if (selectedSeats.includes(seat * columns + column + 1)) {
@@ -61,7 +62,7 @@ function BookShow() {
                   }
 
                   return (
-                    seat * columns + column + 1 <= totalSeats && (
+                    i <= totalSeats && (
                       <div
                         className={seatClass}
                         onClick={() => {
@@ -74,7 +75,7 @@ function BookShow() {
                           }
                         }}
                       >
-                        <h1 className="text-sm">{seat * columns + column + 1}</h1>
+                        <h1 className="text-sm">{i}</h1>
                       </div>
                     )
                   );
@@ -137,13 +138,13 @@ function BookShow() {
     show && (
       <div >
         {/* show infomation */}
-        
+
         <div className="flex justify-between card p-3 items-center">
           <div>
-          <h1 className="text-md">
-          {moment(show.date).format("MMM Do yyyy")} -{" "}
+            <h1 className="text-md">
+              {moment(show.date).format("MMM Do yyyy")} -{" "}
               {moment(show.time, "HH:mm").format("hh:mm A")}
-              </h1>
+            </h1>
           </div>
 
           <div>
@@ -153,9 +154,9 @@ function BookShow() {
           </div>
 
           <div>
-            
+
             <h1 className="text-lg">{show.venue.name}</h1>
-           
+
           </div>
         </div>
 
@@ -174,23 +175,23 @@ function BookShow() {
                   <b>Total Price</b> : {selectedSeats.length * show.ticketPrice}
                 </h1>
               </div>
-            
+
               <div className="pt-1 pr-2 pl-2">
-               <StripeCheckout
-              token={onToken}
-              amount={selectedSeats.length * show.ticketPrice * 100}
-              billingAddress
-              stripeKey="pk_test_51MgdBFSCH7qB0cImTsuPFn9EmP52GNd0ipHzigGHcXkJI6jqQxRcBME7nyZRWmfsqZKbqP5Mo37uMmAkWfDwsS5G00yL45U7sq"
-            >
-              <Button title="Book Now" />
-            </StripeCheckout></div>
+                <StripeCheckout
+                  token={onToken}
+                  amount={selectedSeats.length * show.ticketPrice * 100}
+                  billingAddress
+                  stripeKey="pk_test_51MgdBFSCH7qB0cImTsuPFn9EmP52GNd0ipHzigGHcXkJI6jqQxRcBME7nyZRWmfsqZKbqP5Mo37uMmAkWfDwsS5G00yL45U7sq"
+                >
+                  <Button title="Book Now" />
+                </StripeCheckout></div>
             </div>
           </div>
 
         )}
         <div className="flex justify-center mt-2">{getSeats()}</div>
 
-      
+
       </div>
     )
   );
