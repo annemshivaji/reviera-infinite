@@ -88,7 +88,6 @@ router.post("/make-payment", authMiddleware, async (req, res) => {
       transactionId:charge.id,
     };
     
-
         // save booking
         const newBooking = new Booking(data);
         await newBooking.save();

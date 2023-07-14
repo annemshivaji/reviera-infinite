@@ -13,7 +13,7 @@ function BookShow() {
   const { user } = useSelector((state) => state.users);
   const [show, setShow] = React.useState(null);
   const [selectedSeats, setSelectedSeats] = React.useState([]);
-  var [transactionId, settransactionId] = React.useState();
+ 
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -130,7 +130,8 @@ function BookShow() {
   //   }
   // };
 
- 
+  var [transactionId, settransactionId] = React.useState();
+  
   const onToken = async (token) => {
     try {
       dispatch(ShowLoading());
