@@ -1,30 +1,55 @@
 import { axiosInstance } from ".";
 
-// make payment
-export const MakePayment = async (token, amount) => {
-  try {
-    const response = await axiosInstance.post("/api/bookings/make-payment", {
-      token,
-      amount,
-    });
-    return response.data;
-  } catch (error) {
-    return error.response.data;
-  }
-};
+// // make payment
+// export const MakePayment = async (token, amount) => {
+//   try {
+//     const response = await axiosInstance.post("/api/bookings/make-payment", {
+//       token,
+//       amount,
+//     });
+//     return response.data;
+//   } catch (error) {
+//     return error.response.data;
+//   }
+// };
 
-// book shows
-export const BookShowTickets = async (payload) => {
+// // book shows
+// export const BookShowTickets = async (payload) => {
+//   try {
+//     const response = await axiosInstance.post(
+//       "/api/bookings/book-show",
+//       payload
+//     );
+//     return response.data;
+//   } catch (error) {
+//     return error.response.data;
+//   }
+// };
+
+// make payment
+export const MakePayment = async (show,seats,user,transactionId,token,amount) => {
   try {
-    const response = await axiosInstance.post(
-      "/api/bookings/book-show",
-      payload
+    const response = await axiosInstance.post("/api/bookings/make-payment", 
+      {show,seats,user,transactionId,token,amount}
     );
     return response.data;
   } catch (error) {
     return error.response.data;
   }
 };
+
+// // book shows
+// export const BookShowTickets = async (payload) => {
+//   try {
+//     const response = await axiosInstance.post(
+//       "/api/bookings/book-show",
+//       payload
+//     );
+//     return response.data;
+//   } catch (error) {
+//     return error.response.data;
+//   }
+// };
 
 // get bookings of a user
 export const GetBookingsOfUser = async () => {

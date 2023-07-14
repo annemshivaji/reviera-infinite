@@ -13,6 +13,7 @@ function BookShow() {
   const { user } = useSelector((state) => state.users);
   const [show, setShow] = React.useState(null);
   const [selectedSeats, setSelectedSeats] = React.useState([]);
+  var [transactionId, settransactionId] = React.useState();
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -87,15 +88,60 @@ function BookShow() {
     );
   };
 
-  const book = async (transactionId) => {
+  // const book = async (transactionId) => {
+  //   try {
+  //     dispatch(ShowLoading());
+  //     const response = await BookShowTickets({
+  //       show: params.id,
+  //       seats: selectedSeats,
+  //       transactionId,
+  //       user: user._id,
+  //     });
+  //     if (response.success) {
+  //       message.success(response.message);
+  //       navigate("/profile");
+  //     } else {
+  //       message.error(response.message);
+  //     }
+  //     dispatch(HideLoading());
+  //   } catch (error) {
+  //     message.error(error.message);
+  //     dispatch(HideLoading());
+  //   }
+  // };
+
+  // const onToken = async (token) => {
+  //   try {
+  //     dispatch(ShowLoading());
+  //     const response = await MakePayment(
+  //       token,
+  //       selectedSeats.length * show.ticketPrice * 100,
+  //     );
+  //     if (response.success) {
+  //       message.success(response.message);
+  //       book(response.data);
+  //     } else {
+  //       message.error(response.message);
+  //     }
+  //     dispatch(HideLoading());
+  //   } catch (error) {
+  //     message.error(error.message);
+  //     dispatch(HideLoading());
+  //   }
+  // };
+
+ 
+  const onToken = async (token) => {
     try {
       dispatch(ShowLoading());
-      const response = await BookShowTickets({
-        show: params.id,
-        seats: selectedSeats,
+      const response = await MakePayment(      
+        params.id,
+        selectedSeats,
+        user._id,
         transactionId,
-        user: user._id,
-      });
+        token,
+        selectedSeats.length * show.ticketPrice * 100,
+      );
       if (response.success) {
         message.success(response.message);
         navigate("/profile");
@@ -108,27 +154,6 @@ function BookShow() {
       dispatch(HideLoading());
     }
   };
-
-  const onToken = async (token) => {
-    try {
-      dispatch(ShowLoading());
-      const response = await MakePayment(
-        token,
-        selectedSeats.length * show.ticketPrice * 100,
-      );
-      if (response.success) {
-        message.success(response.message);
-        book(response.data);
-      } else {
-        message.error(response.message);
-      }
-      dispatch(HideLoading());
-    } catch (error) {
-      message.error(error.message);
-      dispatch(HideLoading());
-    }
-  };
-
 
 
   useEffect(() => {
