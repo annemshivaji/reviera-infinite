@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import { GetAllVenuesByEvent } from "../../apicalls/venues";
 
+
 function VenuesForEvent() {
   // get date from query string
   const tempDate = new URLSearchParams(window.location.search).get("date");

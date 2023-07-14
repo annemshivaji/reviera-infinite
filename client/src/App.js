@@ -13,6 +13,7 @@ import "./stylesheets/theme.css";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector } from "react-redux";
 import VenuesForEvent from './pages/VenuesForEvent';
+import Venueshows from "./pages/Venueshows";
 import { Components } from 'antd/es/date-picker/generatePicker';
 import ImageContainer from './ImageContainer';
 
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
       <Route path="/event/:id" element={<ProtectedRoute><VenuesForEvent /></ProtectedRoute>}/>
+      <Route path="/venue-shows/:id" element={<ProtectedRoute><Venueshows /></ProtectedRoute>}/>
       <Route
             path="/book-show/:id"
             element={

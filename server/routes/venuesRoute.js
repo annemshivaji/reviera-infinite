@@ -212,4 +212,21 @@ router.post("/get-show-by-id", authMiddleware, async (req, res) => {
   }
 });
 
+// get a venue by id
+router.get("/get-venue-by-id/:id", async (req, res) => {
+  try {
+    const venue = await Venue.findById(req.params.id);
+    res.send({
+      success: true,
+      message: "Venue fetched successfully",
+      data: venue,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
 module.exports = router;

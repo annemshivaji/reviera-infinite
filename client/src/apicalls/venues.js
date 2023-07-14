@@ -127,3 +127,13 @@ export const GetShowById = async (payload) => {
     return error.response;
   }
 }
+
+// get a venue by id
+export const GetVenueById = async (id) => {
+  try {
+      const response = await axiosInstance.get(`/api/venues/get-venue-by-id/${id}`);
+      return response.data;
+  } catch (error) {
+      return error.response;
+  }
+}
