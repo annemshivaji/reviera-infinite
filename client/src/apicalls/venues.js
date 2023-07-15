@@ -75,19 +75,6 @@ export const AddShow = async (payload) => {
   }
 };
 
-// get all shows
-export const GetAllShowsByVenue = async (payload) => {
-  try {
-    const response = await axiosInstance.post(
-      "/api/venues/get-all-shows-by-venue",
-      payload
-    );
-    return response.data;
-  } catch (error) {
-    return error.response;
-  }
-};
-
 // delete show
 export const DeleteShow = async (payload) => {
   try {
@@ -137,3 +124,17 @@ export const GetVenueById = async (id) => {
       return error.response;
   }
 }
+
+
+// get all shows
+export const GetAllShowsByVenue = async (payload) => {
+  try {
+    const response = await axiosInstance.post(
+      "/api/venues/get-all-shows-by-venue",
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+};
