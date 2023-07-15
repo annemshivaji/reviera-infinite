@@ -29,7 +29,24 @@ function Venueshows() {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const getData = async () => {
+  // const getData = async () => {
+  //   try {
+  //     dispatch(ShowLoading());
+
+  //     const response = await GetVenueById(params.id);
+  //     if (response.success) {
+  //       setVenue(response.data);
+  //     } else {
+  //       message.error(response.message);
+  //     }
+  //     dispatch(HideLoading());
+  //   } catch (error) {
+  //     dispatch(HideLoading());
+  //     message.error(error.message);
+  //   }
+  // };
+
+  const getVenueshows = async () => {
     try {
       dispatch(ShowLoading());
       const eventsResponse = await GetAllEvents();
@@ -38,22 +55,12 @@ function Venueshows() {
       } else {
         message.error(eventsResponse.message);
       }
-      const response = await GetVenueById(params.id);
+          const response = await GetVenueById(params.id);
       if (response.success) {
         setVenue(response.data);
       } else {
         message.error(response.message);
       }
-      dispatch(HideLoading());
-    } catch (error) {
-      dispatch(HideLoading());
-      message.error(error.message);
-    }
-  };
-
-  const getVenueshows = async () => {
-    try {
-      dispatch(ShowLoading());
       const showsResponse = await GetAllShowsByVenue({
         venueId: params.id,
       });
@@ -185,9 +192,9 @@ function Venueshows() {
 
 
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   useEffect(() => {
     getVenueshows();
