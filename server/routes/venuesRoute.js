@@ -114,27 +114,6 @@ router.post("/add-show", authMiddleware, async (req, res) => {
   }
 });
 
-// get all shows by venue
-router.post("/get-all-shows-by-venue", authMiddleware, async (req, res) => {
-  try {
-    const shows = await Show.find({ venue: req.body.venueId })
-      .populate("event")
-      .sort({
-        createdAt: -1,
-      });
-
-    res.send({
-      success: true,
-      message: "Shows fetched successfully",
-      data: shows,
-    });
-  } catch (error) {
-    res.send({
-      success: false,
-      message: error.message,
-    });
-  }
-});
 
 // delete show
 router.post("/delete-show", authMiddleware, async (req, res) => {
@@ -220,6 +199,28 @@ router.get("/get-venue-by-id/:id", async (req, res) => {
       success: true,
       message: "Venue fetched successfully",
       data: venue,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+// get all shows by venue
+router.post("/get-all-shows-by-venue", authMiddleware, async (req, res) => {
+  try {
+    const shows = await Show.find({ venue: req.body.venueId })
+      .populate("event")
+      .sort({
+        createdAt: -1,
+      });
+
+    res.send({
+      success: true,
+      message: "Shows fetched successfully",
+      data: shows,
     });
   } catch (error) {
     res.send({
